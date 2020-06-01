@@ -182,32 +182,29 @@
 </template>
 
 <script>
+  var fireballSize = 22;
 
-   var fireballSize=22; 
+  function getFireballSpeed(isHeadWind) {
 
-   function getFireballSpeed(isHeadWind) {
-    
-    if (!isHeadWind) { 
-      return 5;}
-      return 2;
-   }
+    return (!isHeadWind) ? 5 : 2;
 
-   var wizardWidth=70; 
-  
-   function getWizardHeight(wizardWidth) {
+  }
+
+  var wizardWidth = 70;
+
+  function getWizardHeight(wizardWidth) {
     return 1.337 * wizardWidth;
-   }
+  }
 
-  var wizardSpeed=3; 
- 
-   function getWizardX(gameFieldWidth) {
-    return (gameFieldWidth - wizardWidth)/2;
-   }
+  var wizardSpeed = 3;
 
-   function getWizardY(gameFieldHeight) {
-    return gameFieldHeight/3;
-   }
- 
+  function getWizardX(gameFieldWidth) {
+    return (gameFieldWidth - wizardWidth) / 2;
+  }
+
+  function getWizardY(gameFieldHeight) {
+    return gameFieldHeight / 3;
+  }
 </script>
 <script src="js/game.js"></script>
 
