@@ -37,10 +37,105 @@ var EYES_COLORS = [
 ];
 var QUANTITY_OF_WIZARDS = 4;
 
-var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
-userDialog.querySelector('.setup-similar').classList.remove('hidden');
+var FIREBALL_COLORS = [
+  '#ee4830',
+  '#30a8ee',
+  '#5ce6c0',
+  '#e848d5',
+  '#e6e848',
+];
 
+
+var setUpOpen = document.querySelector('.setup-open-icon');
+var userDialog = document.querySelector('.setup');
+var setUpClose = userDialog.querySelector('.setup-close');
+
+var onPopupEscPress = function (evt) {
+  if (evt.key === 'Escape' && userNameInput.classList.contains('focused') === false) {
+    evt.preventDefault();
+    closePopup();
+  }
+};
+
+var openPopup = function () {
+  userDialog.classList.remove('hidden');
+  userDialog.querySelector('.setup-similar').classList.remove('hidden');
+
+  document.addEventListener('keydown', onPopupEscPress);
+};
+
+var closePopup = function () {
+  userDialog.classList.add('hidden');
+  userDialog.querySelector('.setup-similar').classList.add('hidden');
+
+  document.removeEventListener('keydown', onPopupEscPress);
+};
+
+setUpOpen.addEventListener('click', function () {
+  openPopup();
+});
+
+setUpOpen.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Enter') {
+    openPopup();
+  }
+});
+
+setUpClose.addEventListener('click', function () {
+  closePopup();
+});
+
+// инпут имени
+var userNameInput = document.querySelector('.setup-user-name');
+
+userNameInput.addEventListener('focus', function () {
+  userNameInput.classList.add('focused');
+}, true);
+userNameInput.addEventListener('blur', function () {
+  userNameInput.classList.remove('focused');
+}, true);
+
+
+userNameInput.addEventListener('invalid', function () {
+  if (userNameInput.validity.tooShort) {
+    userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+  } else if (userNameInput.validity.tooLong) {
+    userNameInput.setCustomValidity('Имя не должно превышать 25-ти символов');
+  } else if (userNameInput.validity.valueMissing) {
+    userNameInput.setCustomValidity('Обязательное поле');
+  }
+});
+
+// цвет персонажа
+var setupPlayer = userDialog.querySelector('.setup-player');
+var wizardAppearance = setupPlayer.querySelector('.setup-wizard-appearance');
+var bigWizard = setupPlayer.querySelector('.setup-wizard');
+var cloak = bigWizard.querySelector('.wizard-coat');
+
+cloak.addEventListener('click', function () {
+  cloak.style.fill = getRandomArrayElement(CLOAK_COLORS);
+  var inputCoatColor = wizardAppearance.querySelector('input').value;
+  if (!(cloak.style.fill === inputCoatColor)) {
+    wizardAppearance.querySelector('input').value = cloak.style.fill;
+  }
+});
+
+var eyes = bigWizard.querySelector('.wizard-eyes');
+eyes.addEventListener('click', function () {
+  eyes.style.fill = getRandomArrayElement(EYES_COLORS);
+});
+
+var fireBall = setupPlayer.querySelector('.setup-fireball-wrap');
+var fireballInside = fireBall.querySelector('.setup-fireball');
+
+fireballInside.addEventListener('click', function () {
+  var color = getRandomArrayElement(FIREBALL_COLORS);
+  fireBall.style = 'background-color:' + color;
+  fireBall.querySelector('input').value = color;
+});
+
+
+// код копий магов
 var similarListElement = userDialog.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
