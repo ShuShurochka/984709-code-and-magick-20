@@ -1,14 +1,5 @@
 'use strict';
 (function () {
-  var CLOAK_COLORS = [
-    'rgb(101, 137, 164)',
-    'rgb(241, 43, 107)',
-    'rgb(146, 100, 161)',
-    'rgb(56, 159, 117)',
-    'rgb(215, 210, 55)',
-    'rgb(0, 0, 0)'
-  ];
-
   var FIREBALL_COLORS = [
     '#ee4830',
     '#30a8ee',
@@ -16,13 +7,7 @@
     '#e848d5',
     '#e6e848',
   ];
-  var EYES_COLORS = [
-    'black',
-    'red',
-    'blue',
-    'yellow',
-    'green'
-  ];
+
   var userDialog = document.querySelector('.setup');
   var setupPlayer = userDialog.querySelector('.setup-player');
   var wizardAppearance = setupPlayer.querySelector('.setup-wizard-appearance');
@@ -34,10 +19,10 @@
   var getRandomColor = function (element) {
     switch (element) {
       case eyes:
-        return window.util.getRandomArrayElement(EYES_COLORS);
+        return window.util.getRandomArrayElement(window.util.EYES_COLORS);
 
       case cloak:
-        return window.util.getRandomArrayElement(CLOAK_COLORS);
+        return window.util.getRandomArrayElement(window.util.CLOAK_COLORS);
 
       case fireBall:
         return window.util.getRandomArrayElement(FIREBALL_COLORS);
