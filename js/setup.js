@@ -80,4 +80,14 @@
 
   var fireBall = setupPlayer.querySelector('.setup-fireball-wrap');
   window.colorize(fireBall);
+
+  var form = userDialog.querySelector('.setup-wizard-form');
+
+  var submitHandler = function (evt) {
+    window.backend.save(new FormData(form), function () {
+      userDialog.classList.add('hidden');
+    }, window.util.errorHandler);
+    evt.preventDefault();
+  };
+  form.addEventListener('submit', submitHandler);
 })();
