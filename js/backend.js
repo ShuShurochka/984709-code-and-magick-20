@@ -1,12 +1,18 @@
 'use strict';
 
 (function () {
-  var URL_SAVE = 'https://javascript.pages.academy/code-and-magick';
-  var URL_LOAD = 'https://javascript.pages.academy/code-and-magick/data';
-  var POST_REQUEST = 'POST';
-  var GET_REQUEST = 'get';
 
-  var statusCode = {
+  var RequestAddress = {
+    URL_SAVE: 'https://javascript.pages.academy/code-and-magick',
+    URL_LOAD: 'https://javascript.pages.academy/code-and-magick/data',
+  };
+
+  var RequestMethod = {
+    POST_REQUEST: 'POST',
+    GET_REQUEST: 'GET',
+  };
+
+  var StatusCode = {
     OK: 200
   };
 
@@ -15,10 +21,8 @@
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
-    xhr.open(requestType, URL);
-
     xhr.addEventListener('load', function () {
-      if (xhr.status === statusCode.OK) {
+      if (xhr.status === StatusCode.OK) {
         onLoad(xhr.response);
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
@@ -45,11 +49,11 @@
 
   window.backend = {
     save: function (data, onLoad, onError) {
-      requestServer(POST_REQUEST, URL_SAVE, onLoad, onError, data);
+      requestServer(RequestMethod.POST_REQUEST, RequestAddress.URL_SAVE, onLoad, onError, data);
     },
 
     load: function (onLoad, onError) {
-      requestServer(GET_REQUEST, URL_LOAD, onLoad, onError);
+      requestServer(RequestMethod.GET_REQUEST, RequestAddress.URL_LOAD, onLoad, onError);
     },
   };
 })();
