@@ -6,7 +6,6 @@
   var MAX_SIMILAR_WIZARD_COUNT = 4;
 
   var userDialog = document.querySelector('.setup');
-  var similarListElement = userDialog.querySelector('.setup-similar-list');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
     .querySelector('.setup-similar-item');
@@ -15,20 +14,20 @@
     var wizardElement = similarWizardTemplate.cloneNode(true);
     wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
     wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
-    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
+    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
     return wizardElement;
   };
 
-  var successHandler = function (wizards) {
-    var fragment = document.createDocumentFragment();
+  var similar = document.querySelector('.setup-similar');
+  var similarListElement = userDialog.querySelector('.setup-similar-list');
 
-    for (var i = 0; i < MAX_SIMILAR_WIZARD_COUNT; i++) {
-      fragment.appendChild(renderWizard(wizards[i]));
+  window.render = function (data) {
+    var takeNumber = data.length > MAX_SIMILAR_WIZARD_COUNT ? MAX_SIMILAR_WIZARD_COUNT : data.length;
+    similarListElement.innerHTML = '';
+    for (var i = 0; i < takeNumber; i++) {
+      similarListElement.appendChild(renderWizard(data[i]));
     }
-    similarListElement.appendChild(fragment);
 
-    userDialog.querySelector('.setup-similar').classList.remove('hidden');
+    similar.classList.remove('hidden');
   };
-
-  window.backend.load(successHandler, window.util.errorHandler);
 })();

@@ -44,8 +44,10 @@
         element.style.fill = color;
         if (element === eyes) {
           wizardAppearance.querySelector('input[name="eyes-color"]').value = color;
+          window.wizard.onEyesChange(color);
         } else if (element === cloak) {
           wizardAppearance.querySelector('input[name="coat-color"]').value = color;
+          window.wizard.onCoatChange(color);
         }
       }
     });

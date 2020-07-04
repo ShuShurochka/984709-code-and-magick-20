@@ -68,16 +68,6 @@
   });
 
   var setupPlayer = userDialog.querySelector('.setup-player');
-
-  var bigWizard = setupPlayer.querySelector('.setup-wizard');
-
-  var cloak = bigWizard.querySelector('.wizard-coat');
-  window.colorize(cloak);
-
-
-  var eyes = bigWizard.querySelector('.wizard-eyes');
-  window.colorize(eyes);
-
   var fireBall = setupPlayer.querySelector('.setup-fireball-wrap');
   window.colorize(fireBall);
 
